@@ -17,7 +17,7 @@ pipeline {
                     dir('myapp'){
                         sh 'ls -al'
                         sh "npm install"
-                        sh "CI=false npm build"
+                        sh "CI=false npm run build"
                 }
             }
         }
