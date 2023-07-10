@@ -21,6 +21,13 @@ pipeline {
                 }
             }
         }
+        stage('test') {
+            steps {
+                    dir('myapp'){
+                        sh "npm run test"
+                }
+            }
+        }
         stage('deploy') {
             steps {
                 sh "ls -al"

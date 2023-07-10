@@ -55,7 +55,8 @@ module.exports = {
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        paths: ['./src'],
+        moduleDirectory: ['node_modules', './'],
+        paths: ['src'],
       },
     },
     react: {
