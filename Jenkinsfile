@@ -25,6 +25,21 @@ pipeline {
             steps {
                     dir('myapp'){
                         sh "npm run test"
+                    }
+                }
+        }
+        stage('s3_upload') {
+            steps {
+                withCredentials(
+                    [
+                        [
+                            $class:'AmazonWebServicesCredentialsBinding',
+                            credentialsId: 'AWS_Credentials'
+                        ]
+                    ]
+                )
+                {
+                    sh "aws s3 ls"
                 }
             }
         }
