@@ -39,7 +39,7 @@ pipeline {
                     ]
                 )
                 {
-                    sh "aws s3 ls"
+                    sh "aws s3 cp --recursive ./build s3://bnf-bucket"
                 }
             }
         }
