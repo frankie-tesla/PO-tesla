@@ -39,7 +39,8 @@ pipeline {
                     ]
                 )
                 {
-                    sh "aws s3 cp --recursive ./build s3://bnf-bucket"
+                    sh "aws s3 rm ${BUCKET_PATH}/static"
+                    sh "aws s3 cp --recursive ./build ${BUCKET_PATH}"
                 }
             }
         }
