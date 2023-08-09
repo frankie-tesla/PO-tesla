@@ -15,7 +15,7 @@ pipeline {
         stage('build') {
             steps {
                     dir('myapp'){
-                        echo "${REACT_APP_URL}"
+                        echo "${REACT_APP_TEST}"
                         sh 'ls -al'
                         sh "npm install"
                         sh "CI=false npm run build"
