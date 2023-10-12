@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        nodejs "node16"
+        nodejs "node20"
         git "git"
     }
     stages {
@@ -22,10 +22,10 @@ pipeline {
                 }
             }
         }
-        stage('test') {
+        stage('typecheck') {
             steps {
                     dir('myapp'){
-                        sh "npm run test"
+                        sh "npm run tc"
                     }
                 }
         }
