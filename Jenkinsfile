@@ -1,19 +1,20 @@
 pipeline {
     agent any
     tools {
-        nodejs "node20"
+        nodejs "node18"
         git "git"
     }
     stages {
         stage('prepare') {
             steps {
-                echo 'prepare'
+                echo '<prepare>----------------------------------------'
                  git branch: "${BRANCH}", credentialsId: "GIT_ACCOUNT", url: 'https://github.com/frankieTests/permissionTest.git'
                  sh  'ls -al'
             }
         }
         stage('build') {
             steps {
+                echo '<build>----------------------------------------'
                     dir('myapp'){
                         echo "${REACT_APP_TEST}"
                         sh 'ls -al'
@@ -24,6 +25,7 @@ pipeline {
         }
         stage('typecheck') {
             steps {
+                echo '<typecheck>----------------------------------------'
                     dir('myapp'){
                         sh "npm run tc"
                     }
@@ -31,6 +33,7 @@ pipeline {
         }
         stage('s3_upload') {
             steps {
+                echo '<s3_upload>----------------------------------------'
                 withCredentials(
                     [
                         [
@@ -46,6 +49,7 @@ pipeline {
             }
         }
         stage('deploy') {
+            echo '<deploy>----------------------------------------'
             steps {
                 sh "ls -al"
                 echo 'deploy'   
