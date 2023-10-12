@@ -15,21 +15,17 @@ pipeline {
         stage('build') {
             steps {
                 echo '<build>----------------------------------------'
-                    dir('myapp'){
-                        echo "${REACT_APP_TEST}"
-                        sh 'ls -al'
-                        sh "npm install"
-                        sh "CI=false npm run build"
-                }
+                echo "${REACT_APP_TEST}"
+                sh 'ls -al'
+                sh "npm install"
+                sh "CI=false npm run build"
             }
         }
         stage('typecheck') {
             steps {
-                echo '<typecheck>----------------------------------------'
-                    dir('myapp'){
-                        sh "npm run tc"
-                    }
-                }
+                echo '<typecheck>----------------------------------------'        
+                sh "npm run tc"
+            }
         }
         stage('s3_upload') {
             steps {
