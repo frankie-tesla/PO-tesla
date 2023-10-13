@@ -51,7 +51,7 @@ const SearchWrapper = styled.fieldset`
   & p {
     position: relative;
     padding-right: 40px;
-    height: 32px;
+    height: 36px;
     border: 3px solid #1d7ff9;
     border-radius: 3px;
     background: #fff;
@@ -83,8 +83,8 @@ const SearchWrapper = styled.fieldset`
       border: 0;
       background-color: transparent;
       position: absolute;
-      top: -1px;
-      right: 4px;
+      top: 0;
+      right: 0;
       width: 39px;
       height: 32px;
       cursor: pointer;
