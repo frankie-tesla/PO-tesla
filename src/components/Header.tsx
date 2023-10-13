@@ -21,6 +21,7 @@ const Wrapper = styled.header`
   align-items: center;
   & .logo_img {
     width: 182px;
+    cursor: pointer;
     margin-right: 3rem;
   }
 `;

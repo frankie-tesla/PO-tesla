@@ -35,11 +35,10 @@ const SearchWrapper = styled.fieldset`
   clear: both;
   margin: 0;
   padding: 0;
-  min-width: 400px;
+  min-width: 160px;
   max-width: 732px;
   border: none;
   padding-right: 30px;
-  margin-right: 30px;
   & legend {
     overflow: hidden;
     visibility: hidden;

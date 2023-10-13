@@ -24,6 +24,7 @@ export default CreditInfo;
 
 const Wrapper = styled.div`
   padding: 5px 13px 12px 13px;
+  font-family: "Malgun Gothic", sans-serif;
   & .point {
     display: flex;
     flex-direction: column;

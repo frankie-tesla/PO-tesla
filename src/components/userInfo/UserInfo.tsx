@@ -44,6 +44,7 @@ const Wrapper = styled.button`
       text-overflow: ellipsis;
       font-size: 0.8125rem;
       text-align: start;
+      font-family: "Malgun Gothic", sans-serif;
     }
     & .user_name {
       padding-bottom: 2px;
