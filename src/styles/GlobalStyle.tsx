@@ -9,6 +9,13 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Noto Sans KR","MalgumGothic","Helvetica Neue",system-ui,-apple-system,Helvetica,Arial,sans-serif;
     letter-spacing: -0.3px;
+
+    & button{
+      border: none;
+      outline: none;
+      background-color: inherit ;
+      cursor: pointer;
+    }
   }
 `;
 
