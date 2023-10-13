@@ -1,15 +1,24 @@
 import Header from "./components/Header";
-import LevelStatus from "./components/LevelStatus";
+import SideBar from "./components/SideBar";
+import styled from "styled-components";
 import GlobalStyle from "./styles/GlobalStyle";
-
+import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
       <GlobalStyle />
       <Header />
-      <LevelStatus level={9} />
+      <Main>
+        <SideBar />
+        <Outlet />
+      </Main>
     </>
   );
 }
 
 export default App;
+
+const Main = styled.main`
+  display: flex;
+  height: calc(100vh - 88px);
+`;
