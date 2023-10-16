@@ -1,5 +1,7 @@
+import FileList from "../components/FileList.tsx";
+
 const Home = () => {
-  return <>Home</>;
+  return <FileList />;
 };
 
 export default Home;
