@@ -3,6 +3,7 @@ import { listData } from "../dummy/dummy.ts";
 import { convertUnixDate } from "../utils/date.ts";
 import { getSize } from "../utils/size.ts";
 import { useState } from "react";
+import PaginatedItems from "./PagenationTest.tsx";
 
 const FileList = () => {
   const [selectedItem, setSelectedItem] = useState<string>("name");
@@ -65,6 +66,9 @@ const FileList = () => {
           );
         })}
       </List>
+      <div className="paginationWrpp">
+        <PaginatedItems itemsPerPage={4} />
+      </div>
     </Wrapper>
   );
 };
@@ -161,6 +165,24 @@ const Wrapper = styled.div`
         width: 151px;
         right: 0;
         text-indent: 23px;
+      }
+    }
+  }
+  & .paginationWrpp {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    & .pagenation {
+      width: inherit;
+      list-style: none;
+      display: flex;
+      gap: 0 24px;
+      border: none;
+      font-size: 14px;
+      width: auto;
+      & li {
+        display: block;
+        position: static;
       }
     }
   }
