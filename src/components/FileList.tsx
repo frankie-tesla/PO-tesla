@@ -2,11 +2,35 @@ import styled from "styled-components";
 import { listData } from "../dummy/dummy.ts";
 import { convertUnixDate } from "../utils/date.ts";
 import { getSize } from "../utils/size.ts";
+import Nodoc from "./Nodoc.tsx";
+import Skeleton from "./Skeleton.tsx";
+
+const FileListSkeleton = () => {
+  return (
+    <ul className="skeleton">
+      <li className="form">
+        <Skeleton width={24} height={30} />
+      </li>
+      <li className="name">
+        <Skeleton width={200} height={30} rounded />
+      </li>
+      <li className="modify">
+        <Skeleton width={100} height={30} rounded />
+      </li>
+      <li className="size">
+        <Skeleton width={50} height={30} rounded />
+      </li>
+    </ul>
+  );
+};
 
 const FileList = () => {
+  if (listData.list.length === 0) {
+    return <Nodoc type="favorite" />;
+  }
   return (
     <List>
-      {listData.list.map((data) => {
+      {/* {listData.list.map((data) => {
         const fileExts = data.fileName.split(".");
         return (
           <ul key={data.fileId}>
@@ -24,7 +48,8 @@ const FileList = () => {
             <li className="size">{getSize(data.size)}</li>
           </ul>
         );
-      })}
+      })} */}
+      <FileListSkeleton />
     </List>
   );
 };
@@ -36,6 +61,11 @@ const List = styled.div`
   box-sizing: unset;
   height: calc(100vh - 255px); //헤더, 페이지네이션 값, 폴더정보, 테이블 헤더 높이 제외
   overflow-y: scroll;
+  & .skeleton {
+    & span {
+      margin-top: 10px;
+    }
+  }
   &::-webkit-scrollbar {
     display: none;
   }
