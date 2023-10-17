@@ -1,19 +1,44 @@
 import styled from "styled-components";
 import profileImg from "../../assets/profile.svg";
+import { useRef, useState, useEffect } from "react";
+import ServiceAccount from "./ServiceAccount";
 type Props = {
   userName: string;
   email: string;
 };
 
 const UserInfo = ({ userName, email }: Props) => {
+  const serviceAccountRef = useRef<HTMLButtonElement | null>(null);
+  const [isDropMenuOpen, setDropMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleOutsideClose = (e: MouseEvent) => {
+      // useRef current에 담긴 엘리먼트 바깥을 클릭 시 드롭메뉴 닫힘
+      if (
+        isDropMenuOpen &&
+        serviceAccountRef.current &&
+        e.target instanceof Node &&
+        !serviceAccountRef.current.contains(e.target)
+      ) {
+        setDropMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClose);
+
+    return () => document.removeEventListener("click", handleOutsideClose);
+  }, [isDropMenuOpen]);
   return (
-    <Wrapper>
-      <img src={profileImg} alt="user_icon" />
-      <div className="info">
-        <span className="user_name">{userName}</span>
-        <span className="user_email">{email}</span>
-      </div>
-    </Wrapper>
+    <>
+      <Wrapper ref={serviceAccountRef} onClick={() => setDropMenuOpen(!isDropMenuOpen)}>
+        <img src={profileImg} alt="user_icon" />
+        <div className="info">
+          <span className="user_name">{userName}</span>
+          <span className="user_email">{email}</span>
+        </div>
+      </Wrapper>
+      {isDropMenuOpen && <ServiceAccount />}
+    </>
   );
 };
 

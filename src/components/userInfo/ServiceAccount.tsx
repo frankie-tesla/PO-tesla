@@ -1,25 +1,18 @@
 import styled from "styled-components";
 
 const ServiceAccount = () => {
+  const image = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`;
   return (
-    <Wrapper className="service_account">
-      <img
-        src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`}
-        alt="speech_container"
-      />
+    <Wrapper image={image} className="service_account">
       <ul>
         <li>계정 설정</li>
-        <li id="account_info_upgrade">
-          <a href="/ko/personal/office?upgrade=1">업그레이드</a>
-        </li>
-        <li>
-          <a href="/ko/download">다운로드</a>
-        </li>
+        <li id="account_info_upgrade">업그레이드</li>
+        <li>다운로드</li>
         <li>연락처</li>
         <li>할인 쿠폰 / 이용권</li>
       </ul>
       <div className="b_box">
-        <a href="javascript:logout()">로그아웃</a>
+        <span>로그아웃</span>
       </div>
     </Wrapper>
   );
@@ -27,13 +20,31 @@ const ServiceAccount = () => {
 
 export default ServiceAccount;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ image: string }>`
   position: absolute;
   top: 24px;
   left: 95%;
   width: 218px;
   margin-bottom: 10px;
+  z-index: 1;
+  background: url(${({ image }) => image}) no-repeat 0 0;
 
+  & .b_box {
+    margin: 0 6px 0 14px;
+    padding: 9px 0 10px 0;
+    text-align: center;
+    border-top: 1px solid #d2d2d2;
+    & span {
+      padding: 0 32px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      border-radius: 2px;
+      border: 1px solid #c8c8c8;
+      color: #2f3133 !important;
+      cursor: pointer;
+    }
+  }
   & ul {
     padding: 17px 6px 17px 10px;
     list-style: none;
@@ -45,7 +56,7 @@ const Wrapper = styled.div`
       flex-direction: column;
       position: relative;
       white-space: nowrap;
-
+      cursor: pointer;
       font-size: 13px;
       line-height: 28px !important;
       height: auto !important;
@@ -54,5 +65,15 @@ const Wrapper = styled.div`
       white-space: nowrap;
       word-break: break-all;
     }
+  }
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 218px;
+    height: 10px;
+    background: url(${({ image }) => image}) no-repeat 0 100%;
+    content: "";
   }
 `;
