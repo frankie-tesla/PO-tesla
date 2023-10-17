@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import styled from "styled-components";
 import Next from "../assets/Next";
 import Prev from "../assets/Prev";
 
@@ -30,17 +31,41 @@ function PaginatedItems({ itemsPerPage }: { itemsPerPage: number }) {
   };
 
   return (
-    <ReactPaginate
-      breakLabel="..."
-      nextLabel={<Next color="#a0a0a0" />}
-      onPageChange={handlePageClick}
-      pageRangeDisplayed={5}
-      pageCount={pageCount}
-      previousLabel={<Prev color="#a0a0a0" />}
-      renderOnZeroPageCount={null}
-      containerClassName="pagenation"
-    />
+    <Wrapp>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel={<Next color="#a0a0a0" />}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel={<Prev color="#a0a0a0" />}
+        renderOnZeroPageCount={null}
+        containerClassName="pagenation"
+      />
+    </Wrapp>
   );
 }
 
 export default PaginatedItems;
+
+const Wrapp = styled.div`
+  width: 100%;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  & .pagenation {
+    width: inherit;
+    list-style: none;
+    display: flex;
+    gap: 0 24px;
+    border: none;
+    font-size: 14px;
+    width: auto;
+    height: auto;
+    & li {
+      display: block;
+      position: static;
+    }
+  }
+`;
