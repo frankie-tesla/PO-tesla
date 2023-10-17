@@ -170,8 +170,10 @@ const Wrapper = styled.div`
   }
   & .paginationWrpp {
     width: 100%;
+    height: 62px;
     display: flex;
     justify-content: center;
+    padding: 10px;
     & .pagenation {
       width: inherit;
       list-style: none;
@@ -180,6 +182,7 @@ const Wrapper = styled.div`
       border: none;
       font-size: 14px;
       width: auto;
+      height: auto;
       & li {
         display: block;
         position: static;
@@ -191,7 +194,11 @@ const Wrapper = styled.div`
 const List = styled.div`
   width: 100%;
   box-sizing: unset;
-
+  height: calc(100vh - 255px); //헤더, 페이지네이션 값, 폴더정보, 테이블 헤더 높이 제외
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   ul {
     border-top: none;
     box-sizing: unset;
