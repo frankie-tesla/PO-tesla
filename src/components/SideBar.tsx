@@ -4,12 +4,20 @@ import { NavLink } from "react-router-dom";
 import ShareIcon from "../assets/ShareIcon";
 import Importatnt from "../assets/Importatnt";
 import LogoIcon from "../assets/LogoIcon";
+import { useDocumentLocationTypeContext } from "../context/DocumentLocationTypeContext";
 const SideBar = () => {
+  const {
+    actions: { setType }
+  } = useDocumentLocationTypeContext();
+
+  const onClick = (type: string) => {
+    setType(type);
+  };
   return (
     <Wrapper>
       <UserInfoWrapper />
       <nav>
-        <NavLink to="/">
+        <NavLink to="/" onClick={() => onClick("My Polaris Drive")}>
           {({ isActive }) => (
             <>
               <LogoIcon isActive={isActive} />
@@ -17,7 +25,7 @@ const SideBar = () => {
             </>
           )}
         </NavLink>
-        <NavLink to="share">
+        <NavLink to="share" onClick={() => onClick("공유 문서")}>
           {({ isActive }) => (
             <>
               <ShareIcon color={isActive ? "#1e82ff" : "#6e6e6e"} />
@@ -25,7 +33,7 @@ const SideBar = () => {
             </>
           )}
         </NavLink>
-        <NavLink to="favorite">
+        <NavLink to="favorite" onClick={() => onClick("중요 문서")}>
           {({ isActive }) => (
             <>
               <Importatnt color={isActive ? "#1e82ff" : "#6e6e6e"} />
@@ -43,7 +51,7 @@ export default SideBar;
 const Wrapper = styled.aside`
   width: 260px;
   border-right: 1px solid #dcdcdc;
-
+  position: relative;
   nav {
     border-top: 1px solid #ebebeb;
     padding: 18px 20px 0 10px;
@@ -53,7 +61,7 @@ const Wrapper = styled.aside`
     & a {
       padding-left: 12px;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 13px;
       font-family: "Malgun Gothic", sans-serif;
       display: flex;
 
