@@ -1,7 +1,10 @@
-import FileList from "../components/FileList.tsx";
-
+import FileListWrapper from "../components/FileListWrapper.tsx";
 const Home = () => {
-  return <FileList />;
+  return (
+    <>
+      <FileListWrapper />
+    </>
+  );
 };
 
 export default Home;

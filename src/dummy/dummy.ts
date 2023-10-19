@@ -1319,7 +1319,7 @@ export const listData = {
   scannerUsage: 0,
   teamUsage: 0,
   parentId: "930307",
-  list: [...list],
+  list: [list[0]],
   revision: 143,
   directoryInfo: {
     fileId: "930307",

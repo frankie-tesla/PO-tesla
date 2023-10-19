@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^1.5.1",
+    "crypto": "^1.0.1",
     "date-fns": "^2.30.0",
     "pretty-bytes": "^6.1.1",
     "react": "^18.2.0",
@@ -23,8 +24,6 @@
   },
   "devDependencies": {
     "@tanstack/react-query": "^4.36.1",
-    "@types/react-paginate": "^7.1.2",
-    "@types/react-router-dom": "^5.3.3",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.5.1",
@@ -32,6 +31,8 @@
     "@types/node": "^20.8.4",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react-paginate": "^7.1.2",
+    "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
