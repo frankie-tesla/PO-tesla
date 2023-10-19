@@ -1,14 +1,17 @@
-import { createHash } from "crypto";
 import CarService from "../apis/carListService";
+import { SHA256 } from "crypto-js";
 
 const Favorite = () => {
   const onClick = async () => {
     const car = new CarService();
 
+    const password = "fhrhxla12!";
+    const hash = SHA256(password).toString();
+
     const res = await car.Login({
       autoLogin: true,
       email: "frankie.j.kim@polarisoffice.com",
-      password: createHash("sha256").update("fhrhxla12!").digest("hex")
+      password: hash
     });
     console.log(res);
   };

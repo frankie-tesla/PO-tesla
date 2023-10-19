@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 const request: AxiosInstance = axios.create({
-  baseURL: process.env.VITE_APP_API,
+  baseURL: import.meta.env.VITE_APP_API,
   timeout: 240000,
   withCredentials: true,
   headers: {
