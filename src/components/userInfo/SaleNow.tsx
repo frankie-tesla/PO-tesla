@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 const SaleNow = () => {
   //toDo: API 연결 시 sale 이미지 포함
   const onClick = () => {

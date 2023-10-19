@@ -7,8 +7,8 @@ interface Props {
   circle?: boolean;
   rounded?: boolean;
   count?: number;
-  wUnit?: string;
-  hUnit?: string;
+  wunit?: string;
+  hunit?: string;
   animation?: boolean;
   color?: string;
   style?: React.CSSProperties;
@@ -22,8 +22,8 @@ const Skeleton: React.FC<Props> = ({
   circle,
   rounded,
   count,
-  hUnit = "px",
-  wUnit = "px",
+  hunit = "px",
+  wunit = "px",
   animation = true,
   color = "#f4f4f4",
   mb = 0
@@ -37,8 +37,8 @@ const Skeleton: React.FC<Props> = ({
       width={width}
       height={height}
       animation={animation}
-      hUnit={hUnit}
-      wUnit={wUnit}
+      hunit={hunit}
+      wunit={wunit}
       color={color}
       mb={mb}
       data-testid="skeleton">
@@ -72,8 +72,8 @@ const Base = styled.span<Props>`
   ${({ width, height }) => (width || height) && `display: block`};
   ${({ animation }) => animation && pulseAnimation};
   margin-bottom: ${({ mb }) => mb}px;
-  width: ${({ width, wUnit }) => width && wUnit && `${width}${wUnit}`};
-  height: ${({ height, hUnit }) => height && hUnit && `${height}${hUnit}`};
+  width: ${({ width, wunit }) => width && wunit && `${width}${wunit}`};
+  height: ${({ height, hunit }) => height && hunit && `${height}${hunit}`};
 `;
 
 const Content = styled.span`

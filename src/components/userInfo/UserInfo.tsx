@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import profileImg from "../../assets/profile.svg";
 import { useRef, useState, useEffect } from "react";
 import ServiceAccount from "./ServiceAccount";

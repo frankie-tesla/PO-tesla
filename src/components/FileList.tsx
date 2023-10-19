@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { listData } from "../dummy/dummy.ts";
 import { convertUnixDate } from "../utils/date.ts";
 import { getSize } from "../utils/size.ts";
@@ -12,13 +12,13 @@ const FileListSkeleton = () => {
         <Skeleton width={24} height={30} />
       </li>
       <li className="name">
-        <Skeleton width={200} height={30} rounded />
+        <Skeleton width={200} height={30} rounded={true} />
       </li>
       <li className="modify">
-        <Skeleton width={100} height={30} rounded />
+        <Skeleton width={100} height={30} rounded={true} />
       </li>
       <li className="size">
-        <Skeleton width={50} height={30} rounded />
+        <Skeleton width={50} height={30} rounded={true} />
       </li>
     </ul>
   );

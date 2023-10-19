@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import Next from "../assets/Next";
 import Prev from "../assets/Prev";
 

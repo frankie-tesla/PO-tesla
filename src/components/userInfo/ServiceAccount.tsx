@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 const ServiceAccount = () => {
   const image = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`;

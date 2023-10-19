@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import UserInfoWrapper from "./userInfo/UserInfoWrapper";
 import { NavLink } from "react-router-dom";
 import ShareIcon from "../assets/ShareIcon";

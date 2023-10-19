@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Outlet } from "react-router-dom";
 function App() {
