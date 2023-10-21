@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import Next from "../assets/Next";
-import Prev from "../assets/Prev";
+import Next from "../../assets/Next";
+import Prev from "../../assets/Prev";
 
 interface PagenationType {
   totalPage: number;
