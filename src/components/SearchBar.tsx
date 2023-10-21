@@ -1,10 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import searchImg from "../assets/search.svg";
-
+import { useSearchStateContext } from "../context/SearchStateContext";
+import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
   const [first, setfirst] = useState("");
+  const [isClick, setIsClick] = useState(false);
+  const navigate = useNavigate();
+  const {
+    state,
+    actions: { setState }
+  } = useSearchStateContext();
+  useEffect(() => {
+    if (isClick) {
+      setState({ ...state, keyword: first, isClick });
+      setIsClick(!isClick);
+    }
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClick]);
   return (
     <SearchWrapper>
       <legend>검색</legend>
@@ -18,9 +32,10 @@ const SearchBar = () => {
           type="text"
           id="search"
           className="placeholder"
+          onFocus={() => navigate("/search")}
         />
 
-        <button className="doc">
+        <button className="doc" onClick={() => setIsClick(true)}>
           <img src={searchImg} alt="search_btn" />
         </button>
       </p>
