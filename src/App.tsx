@@ -3,15 +3,25 @@ import SideBar from "./components/SideBar";
 import styled from "@emotion/styled";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Outlet } from "react-router-dom";
+import { DocumentLocationTypeContextProvider } from "./context/DocumentLocationTypeContext";
+import { DataListsContextProvider } from "./context/DataListsContext";
+import { SearchStateContextProvider } from "./context/SearchStateContext";
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
-      <Main>
-        <SideBar />
-        <Outlet />
-      </Main>
+
+      <SearchStateContextProvider>
+        <Header />
+        <DocumentLocationTypeContextProvider>
+          <Main>
+            <SideBar />
+            <DataListsContextProvider>
+              <Outlet />
+            </DataListsContextProvider>
+          </Main>
+        </DocumentLocationTypeContextProvider>
+      </SearchStateContextProvider>
     </>
   );
 }
