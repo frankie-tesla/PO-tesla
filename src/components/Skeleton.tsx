@@ -5,14 +5,14 @@ interface Props {
   width?: number;
   height?: number;
   circle?: boolean;
-  rounded?: boolean;
+  $rounded?: boolean;
   count?: number;
-  wunit?: string;
-  hunit?: string;
-  animation?: boolean;
+  $wUnit?: string;
+  $hUnit?: string;
+  $animation?: boolean;
   color?: string;
   style?: React.CSSProperties;
-  mb?: number;
+  $mb?: number;
 }
 
 const Skeleton: React.FC<Props> = ({
@@ -20,27 +20,27 @@ const Skeleton: React.FC<Props> = ({
   style,
   height,
   circle,
-  rounded,
+  $rounded,
   count,
-  hunit = "px",
-  wunit = "px",
-  animation = true,
+  $hUnit = "px",
+  $wUnit = "px",
+  $animation = true,
   color = "#f4f4f4",
-  mb = 0
+  $mb = 0
 }) => {
   const content = useMemo(() => [...Array({ length: count })].map(() => "-").join(""), [count]);
   return (
     <Base
       style={style}
-      rounded={rounded}
+      $rounded={$rounded}
       circle={circle}
       width={width}
       height={height}
-      animation={animation}
-      hunit={hunit}
-      wunit={wunit}
+      $animation={$animation}
+      $hUnit={$hUnit}
+      $wUnit={$wUnit}
       color={color}
-      mb={mb}
+      $mb={$mb}
       data-testid="skeleton">
       <Content>{content}</Content>
     </Base>
@@ -67,13 +67,13 @@ const pulseAnimation = css`
 
 const Base = styled.span<Props>`
   ${({ color }) => color && `background-color: ${color}`};
-  ${({ rounded }) => rounded && `border-radius: 8px`};
+  ${({ $rounded }) => $rounded && `border-radius: 8px`};
   ${({ circle }) => circle && `border-radius: 50%`};
   ${({ width, height }) => (width || height) && `display: block`};
-  ${({ animation }) => animation && pulseAnimation};
-  margin-bottom: ${({ mb }) => mb}px;
-  width: ${({ width, wunit }) => width && wunit && `${width}${wunit}`};
-  height: ${({ height, hunit }) => height && hunit && `${height}${hunit}`};
+  ${({ $animation }) => $animation && pulseAnimation};
+  margin-bottom: ${({ $mb }) => $mb}px;
+  width: ${({ width, $wUnit }) => width && $wUnit && `${width}${$wUnit}`};
+  height: ${({ height, $hUnit }) => height && $hUnit && `${height}${$hUnit}`};
 `;
 
 const Content = styled.span`
