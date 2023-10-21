@@ -16,7 +16,7 @@ const DocumentLocationTypeContext = createContext<DocumentLocationType>({
 });
 
 export const DocumentLocationTypeContextProvider = ({ children }: Props) => {
-  const [type, setType] = useState("");
+  const [type, setType] = useState("My Polaris Drive");
 
   const actions = useMemo(
     () => ({
