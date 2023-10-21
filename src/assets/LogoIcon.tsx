@@ -1,8 +1,8 @@
 type Props = {
-  isActive: boolean;
+  isActive?: boolean;
 };
 
-const LogoIcon = ({ isActive }: Props) => {
+const LogoIcon = ({ isActive = true }: Props) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="21" viewBox="0 0 24 21" fill="none">
       <g id="PO nor">
