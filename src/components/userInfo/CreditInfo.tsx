@@ -1,17 +1,34 @@
 import styled from "@emotion/styled";
 import { numberset } from "../../utils/nemberset";
+import useUserInfoQuery from "../../hooks/useUserInfoQuery";
+import Skeleton from "../Skeleton";
 
-type Props = {
-  credit: number;
-};
-const CreditInfo = ({ credit }: Props) => {
+const CreditInfo = () => {
+  const { getAIUserInfo } = useUserInfoQuery();
+  const { data, isLoading } = getAIUserInfo();
+
+  if (isLoading) {
+    <Wrapper>
+      <div className="point">
+        <dl>
+          <dt>Credit</dt>
+          <dd>
+            <span>
+              <Skeleton width={50} height={20} rounded={false} animation={true} />
+            </span>
+            <img src={`${import.meta.env.VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
+          </dd>
+        </dl>
+      </div>
+    </Wrapper>;
+  }
   return (
     <Wrapper>
       <div className="point">
         <dl>
           <dt>Credit</dt>
           <dd>
-            <span>{numberset(credit)}</span>
+            <span>{numberset(data?.userinfo?.remainCredit)}</span>
             <img src={`${import.meta.env.VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
           </dd>
         </dl>

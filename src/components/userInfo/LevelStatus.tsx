@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
+import Skeleton from "../Skeleton";
 type Props = {
-  level: 4 | 8 | 9 | 12 | 13;
+  level: 4 | 8 | 9 | 12 | 13 | undefined;
+  isLoading: boolean;
 };
 const userLevel = {
   4: { title: "Business", color: "#102362" },
@@ -9,11 +11,23 @@ const userLevel = {
   12: { title: "AI", color: "#6f3ad0" }, // 12 - AI Basic 사용자
   13: { title: "AI-Plus", color: "#6f3ad0" } // 13 - AI PLUS 사용자
 };
-const LevelStatus = ({ level }: Props) => {
+const LevelStatus = ({ level, isLoading }: Props) => {
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton height={30} width={260} />
+      </div>
+    );
+  }
+  const icon = level === 4 ? "ic_business_small" : "ic_crown_small";
   return (
-    <Wrapper level={level}>
-      <img src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/ic_crown_small.svg`} alt="crown" />
-      <strong>{userLevel[level].title} 서비스 이용 중</strong>
+    <Wrapper level={level ?? 4}>
+      <img
+        src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/${icon}.svg`}
+        className={icon}
+        alt="crown"
+      />
+      <strong>{userLevel[level ?? 4].title} 서비스 이용 중</strong>
     </Wrapper>
   );
 };
@@ -30,12 +44,18 @@ const Wrapper = styled.div<{
   & img {
     width: 24px;
     height: 24px;
-    margin-right: 26px;
+    margin-left: 18px;
+  }
+  & .ic_business_small {
+    width: 20px;
+    height: 12px;
+    margin-left: 21px;
   }
 
   & strong {
     font-size: 0.8125rem;
     font-weight: bold;
     font-family: "Noto Sans KR", sans-serif;
+    margin-left: 20px;
   }
 `;
