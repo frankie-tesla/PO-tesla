@@ -1,43 +1,42 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import searchImg from "../assets/search.svg";
 import { useSearchStateContext } from "../context/SearchStateContext";
-import { useNavigate } from "react-router-dom";
+import CloseBtn from "../assets/CloseBtn";
+import SearchBtn from "../assets/SearchBtn";
+
 const SearchBar = () => {
-  const [first, setfirst] = useState("");
+  const [word, setWord] = useState("");
   const [isClick, setIsClick] = useState(false);
-  const navigate = useNavigate();
-  const {
-    state,
-    actions: { setState }
-  } = useSearchStateContext();
+  const { setKeyword } = useSearchStateContext();
   useEffect(() => {
     if (isClick) {
-      setState({ ...state, keyword: first, isClick });
+      setKeyword(word);
       setIsClick(!isClick);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClick]);
+
+  const onReset = () => {
+    setWord("");
+  };
   return (
     <SearchWrapper>
       <legend>검색</legend>
       <p className="search">
-        <label htmlFor="search" className={first !== "" ? "none" : ""}>
+        <label htmlFor="search" className={word !== "" ? "none" : ""}>
           Polaris Drive 검색
         </label>
-        <input
-          value={first}
-          onChange={(e) => setfirst(e.target.value)}
-          type="text"
-          id="search"
-          className="placeholder"
-          onFocus={() => navigate("/search")}
-        />
+        <input value={word} onChange={(e) => setWord(e.target.value)} type="text" id="search" className="placeholder" />
 
         <button className="doc" onClick={() => setIsClick(true)}>
-          <img src={searchImg} alt="search_btn" />
+          <SearchBtn />
         </button>
+        {word !== "" && (
+          <div className="del" onClick={onReset}>
+            <CloseBtn />
+          </div>
+        )}
       </p>
     </SearchWrapper>
   );
@@ -106,6 +105,14 @@ const SearchWrapper = styled.fieldset`
 
     & .none {
       display: none;
+    }
+
+    & .del {
+      position: absolute;
+      top: 8px;
+      right: 48px;
+      width: 18px;
+      height: 18px;
     }
   }
 `;
