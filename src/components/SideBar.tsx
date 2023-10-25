@@ -6,21 +6,16 @@ import Importatnt from "../assets/Importatnt";
 import LogoIcon from "../assets/LogoIcon";
 import { useDocumentLocationTypeContext } from "../context/DocumentLocationTypeContext";
 import { useSearchStateContext } from "../context/SearchStateContext";
+
 const SideBar = () => {
   const {
     type,
     actions: { setType }
   } = useDocumentLocationTypeContext();
-  const {
-    state,
-    actions: { setState }
-  } = useSearchStateContext();
+  const { setKeyword } = useSearchStateContext();
   const onClick = (type: string) => {
     setType(type);
-    let menuType: "DRIVE" | "STAR" | "SHARE" = "DRIVE";
-    if (type === "중요 문서") menuType = "STAR";
-    else if (type === "공유 문서") menuType = "SHARE";
-    setState({ ...state, menuType });
+    setKeyword("");
   };
 
   return (
@@ -28,17 +23,23 @@ const SideBar = () => {
       <UserInfoWrapper />
       <nav>
         <Link
-          to="/"
+          to="/ko/carMode"
           className={type === "My Polaris Drive" ? "active" : ""}
           onClick={() => onClick("My Polaris Drive")}>
           <LogoIcon isActive={type === "My Polaris Drive"} />
           My Polaris Drive
         </Link>
-        <Link to="share" className={type === "공유 문서" ? "active" : ""} onClick={() => onClick("공유 문서")}>
+        <Link
+          to="/ko/carMode/share"
+          className={type === "공유 문서" ? "active" : ""}
+          onClick={() => onClick("공유 문서")}>
           <ShareIcon color={type === "공유 문서" ? "#1e82ff" : "#6e6e6e"} />
           공유 문서
         </Link>
-        <Link to="favorite" className={type === "중요 문서" ? "active" : ""} onClick={() => onClick("중요 문서")}>
+        <Link
+          to="/ko/carMode/favorite"
+          className={type === "중요 문서" ? "active" : ""}
+          onClick={() => onClick("중요 문서")}>
           <Importatnt color={type === "중요 문서" ? "#1e82ff" : "#6e6e6e"} />
           중요 문서
         </Link>
