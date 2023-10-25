@@ -5,17 +5,17 @@ type Props = {
 
 const Nodoc = ({ type }: Props) => {
   const noDocImg = () => {
-    if (type === "share") {
+    if (type === "공유 문서") {
       return "noshare";
-    } else if (type === "favorite") {
+    } else if (type === "중요 문서") {
       return "no_favorite";
     }
     return "no_doc";
   };
   const noDocText = () => {
-    if (type === "share") {
+    if (type === "공유 문서") {
       return "공유 문서가 없습니다.";
-    } else if (type === "favorite") {
+    } else if (type === "중요 문서") {
       return "중요 문서가 없습니다.";
     }
     return "문서가 없습니다.";
