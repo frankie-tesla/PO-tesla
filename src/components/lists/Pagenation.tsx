@@ -32,7 +32,7 @@ const Pagenation = ({ totalPage, limit, page, setPage }: PagenationType) => {
   }, [page, limit, totalPageArray]);
 
   useEffect(() => {
-    const slicedPageArray = sliceArrayByLimit(totalPage, limit);
+    const slicedPageArray = sliceArrayByLimit(totalPage === 0 ? 1 : totalPage, limit);
     setTotalPageArray(slicedPageArray);
     setCurrentPageArray(slicedPageArray[0]);
   }, [totalPage, limit]);
@@ -42,13 +42,13 @@ const Pagenation = ({ totalPage, limit, page, setPage }: PagenationType) => {
     setPage(currentPageArray[0] - 5);
   };
   const onNext = () => {
-    if (currentPageArray.includes(totalPage)) return;
+    if (currentPageArray.includes(totalPage === 0 ? 1 : totalPage)) return;
     setPage(currentPageArray[0] + 5);
   };
   return (
     <Wrapp>
-      <button onClick={onPrev} disabled={currentPageArray[0] === 1}>
-        <Prev color={currentPageArray[0] === 1 ? "#D8D8D8" : "#a0a0a0"} />
+      <button onClick={onPrev} disabled={currentPageArray[0] === 0}>
+        <Prev color={currentPageArray[0] === 0 ? "#D8D8D8" : "#a0a0a0"} />
       </button>
 
       <ul className="pagenation">
