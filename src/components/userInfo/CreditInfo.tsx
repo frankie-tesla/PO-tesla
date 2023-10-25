@@ -14,7 +14,7 @@ const CreditInfo = () => {
           <dt>Credit</dt>
           <dd>
             <span>
-              <Skeleton width={50} height={20} rounded={false} animation={true} />
+              <Skeleton width={50} height={20} />
             </span>
             <img src={`${import.meta.env.VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
           </dd>

@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
-import profileImg from "../../assets/profile.svg";
 import { useRef, useState, useEffect } from "react";
 import ServiceAccount from "./ServiceAccount";
-
 import Skeleton from "../Skeleton";
 import { UserInfo as UserInfoType } from "../../apis/type";
+import Profile from "../../assets/Profile";
 type Props = {
   data: UserInfoType | undefined;
   isLoading: boolean;
@@ -34,7 +33,7 @@ const UserInfo = ({ data, isLoading }: Props) => {
   if (isLoading) {
     return (
       <Wrapper>
-        <img src={profileImg} alt="user_icon" />
+        <Profile />
         <div className="info">
           <span className="user_name">
             <Skeleton width={120} height={20} />
@@ -49,7 +48,7 @@ const UserInfo = ({ data, isLoading }: Props) => {
   return (
     <>
       <Wrapper ref={serviceAccountRef} onClick={() => setDropMenuOpen(!isDropMenuOpen)}>
-        <img src={profileImg} alt="user_icon" />
+        <Profile />
         <div className="info">
           <span className="user_name">{data?.fullName}</span>
           <span className="user_email">{data?.email}</span>
@@ -69,7 +68,7 @@ const Wrapper = styled.button`
   padding-left: 15px;
   min-height: 35px;
   width: 100%;
-  & img {
+  & svg {
     overflow: hidden;
     display: block;
     width: 35px;

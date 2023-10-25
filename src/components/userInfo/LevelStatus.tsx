@@ -14,7 +14,7 @@ const userLevel = {
 const LevelStatus = ({ level, isLoading }: Props) => {
   if (isLoading) {
     return (
-      <div>
+      <div style={{ marginBottom: "5px" }}>
         <Skeleton height={30} width={260} />
       </div>
     );
