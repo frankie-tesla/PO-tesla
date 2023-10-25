@@ -46,9 +46,7 @@ const FileList = (
   ref: ForwardedRef<HTMLDivElement>
 ) => {
   const { type } = useDocumentLocationTypeContext();
-  if (!datas || datas.length === 0) {
-    return <Nodoc type="favorite" />;
-  }
+
   if (isLoading) {
     return (
       <List id="list" ref={ref}>
@@ -59,7 +57,12 @@ const FileList = (
     );
   }
 
+  if (!datas || datas.length === 0) {
+    return <Nodoc type={type} />;
+  }
+
   const onClick = (type: string, fileId: string, fileName: string) => {
+    const docType = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
     if (type === "DIR") {
       setDriveRequestData({
         ...driveRequestData,
@@ -73,8 +76,10 @@ const FileList = (
           fileId
         }
       ]);
+    } else if (docType === "pdf" || docType === "hwp") {
+      location.href = "/d/" + base62.encode(Number(fileId)) + "?tesla=true";
     } else {
-      location.href = "/d/" + base62.encode(Number(fileId)) + "/" + "#MyDocument?FileBrowser&tesla=true";
+      location.href = "/d/" + base62.encode(Number(fileId)) + "/" + "#MyDocument?FileBrowser";
     }
   };
 
