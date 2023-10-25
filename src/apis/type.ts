@@ -4,7 +4,6 @@ export type BaseRequest = {
   recursive?: boolean;
   path?: string | null;
   fileStatus?: "NORMAL" | "HIDDEN" | "ALL";
-  keyword?: string;
 } & Favorite;
 
 export type Favorite = {
@@ -12,6 +11,7 @@ export type Favorite = {
   count: number;
   sort: "TIME" | "NAME";
   desc: boolean;
+  keyword?: string;
 };
 type RequireAtLeastOne<T, Keys extends keyof T> = Pick<T, Exclude<keyof T, Keys>> &
   {

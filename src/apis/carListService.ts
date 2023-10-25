@@ -8,13 +8,13 @@ export default class CarService {
   }
 
   async getDriveList(data: BaseRequest) {
-    const response: AxiosResponse<DriveListRes> = await request.post(`${this.baseUrl}/page/list`, data);
+    const response: AxiosResponse<DriveListRes> = await request.post(`${this.baseUrl}/list`, data);
     return response.data;
   }
 
   async getShareList(data: Favorite) {
     const response: AxiosResponse<{ workList: { fileInfo: FileInfo }[]; totalCount: number }> = await request.post(
-      "/2/cowork/page/list",
+      "/2/cowork/list",
       data
     );
     return response.data;
@@ -22,7 +22,7 @@ export default class CarService {
 
   async getFavoriteList(data: Favorite) {
     const response: AxiosResponse<{ list: ListData[]; totalCount: number }> = await request.post(
-      `${this.baseUrl}/star/page/list`,
+      `${this.baseUrl}/star/list`,
       data
     );
     return response.data;
