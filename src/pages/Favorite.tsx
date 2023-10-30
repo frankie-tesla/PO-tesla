@@ -29,12 +29,6 @@ const Favorite = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, keyword, postPerPage]);
 
-  useEffect(() => {
-    return () => {
-      storage.set("page", 10);
-    };
-  }, []);
-
   const { isLoading, data, isSuccess } = getFavoriteList(driveRequestData);
 
   if (isSuccess) {

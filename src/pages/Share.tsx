@@ -39,16 +39,10 @@ const Share = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, keyword, postPerPage]);
 
-  useEffect(() => {
-    return () => {
-      storage.set("page", 10);
-    };
-  }, []);
-
   const { isLoading, data, isSuccess } = getShareList(driveRequestData);
 
   if (isSuccess) {
-    storage.set("page", data.totalCount);
+    storage.set("page", data.totalCount || 0);
   }
 
   useEffect(() => {
