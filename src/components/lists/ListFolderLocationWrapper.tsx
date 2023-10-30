@@ -21,16 +21,16 @@ const ListFolderLocationWrapper = ({ setDriveRequestData, driveRequestData, docL
   return (
     <>
       {location.pathname === "/" ? (
+        <LocationStyle>
+          <LiStyle>{type}</LiStyle>
+        </LocationStyle>
+      ) : (
         <DriveLocation
           setDocLocations={setDocLocations}
           driveRequestData={driveRequestData}
           setDriveRequestData={setDriveRequestData}
           docLocations={docLocations}
         />
-      ) : (
-        <LocationStyle>
-          <LiStyle>{type}</LiStyle>
-        </LocationStyle>
       )}
     </>
   );

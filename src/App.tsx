@@ -4,21 +4,17 @@ import styled from "@emotion/styled";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Outlet } from "react-router-dom";
 import { DocumentLocationTypeContextProvider } from "./context/DocumentLocationTypeContext";
-import { DataListsContextProvider } from "./context/DataListsContext";
 import { SearchStateContextProvider } from "./context/SearchStateContext";
 function App() {
   return (
     <>
       <GlobalStyle />
-
       <SearchStateContextProvider>
         <Header />
         <DocumentLocationTypeContextProvider>
           <Main>
             <SideBar />
-            <DataListsContextProvider>
-              <Outlet />
-            </DataListsContextProvider>
+            <Outlet />
           </Main>
         </DocumentLocationTypeContextProvider>
       </SearchStateContextProvider>

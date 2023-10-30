@@ -13,4 +13,10 @@ export default class UserService {
     const response: AxiosResponse<AiUserInfo> = await request.post("/1/ai/userinfo");
     return response.data;
   }
+
+  async getSimpleUserInfo() {
+    const response: AxiosResponse<UserInfo & { resultCode: number; status: string; userId: string }> =
+      await request.post(`/2/account/userinfo/simple`);
+    return response.data;
+  }
 }

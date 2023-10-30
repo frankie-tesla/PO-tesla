@@ -1,16 +1,19 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import FileListWrapper from "../components/lists/FileListWrapper.tsx";
 import useDriveQuery from "../hooks/useDriveQuery.tsx";
 import { BaseRequest } from "../apis/type";
 import CarService from "../apis/carListService";
 import { SHA256 } from "crypto-js";
-import { useDataListsContext } from "../context/DataListsContext.tsx";
+
+import { useSearchStateContext } from "../context/SearchStateContext.tsx";
+
 const Home = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(10);
+  const postPerPage = useMemo(() => Math.ceil((ref.current?.clientHeight || 500) / 50), [ref.current?.clientHeight]);
 
-  const postPerPage = Math.ceil((ref.current?.clientHeight || 500) / 50);
-
+  const { keyword } = useSearchStateContext();
   const { getDriveList } = useDriveQuery();
   const [driveRequestData, setDriveRequestData] = useState<BaseRequest>({
     page: page,
@@ -18,47 +21,41 @@ const Home = () => {
     fileStatus: "NORMAL",
     count: postPerPage,
     sort: "TIME",
-    desc: true
+    desc: true,
+    keyword: keyword
   });
+  if (import.meta.env.MODE === "development") {
+    useEffect(() => {
+      const login = async () => {
+        const car = new CarService();
+        const password = "fhrhxla12!";
+        const hash = SHA256(password).toString();
 
-  const {
-    actions: { setList }
-  } = useDataListsContext();
-
-  useEffect(() => {
-    const login = async () => {
-      const car = new CarService();
-      const password = "fhrhxla12!";
-      const hash = SHA256(password).toString();
-
-      const res = await car.Login({
-        autoLogin: true,
-        email: "frankie.j.kim@polarisoffice.com",
-        password: hash
-      });
-      console.log(res);
-    };
-    login();
-  }, []);
+        const res = await car.Login({
+          autoLogin: true,
+          email: "frankie.j.kim@polarisoffice.com",
+          password: hash
+        });
+        console.log(res);
+      };
+      login();
+    }, []);
+  }
 
   useEffect(() => {
     setDriveRequestData({
       ...driveRequestData,
-      page: page
+      page,
+      keyword,
+      count: postPerPage
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, keyword, postPerPage]);
 
-  const { isLoading, data, isSuccess } = getDriveList(driveRequestData);
+  const { isLoading, data } = getDriveList(driveRequestData);
 
-  useEffect(() => {
-    console.log("Inside useEffect", isSuccess, data?.list);
-    if (isSuccess) {
-      setList(data.list);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, data?.list]);
-
+  const totalPage = useMemo(() => Math.ceil((data?.totalCount ?? 10) / postPerPage), [postPerPage, data?.totalCount]);
+  console.log("eawda", totalPage, postPerPage, data?.totalCount);
   return (
     <FileListWrapper
       setDriveRequestData={setDriveRequestData}
@@ -66,9 +63,9 @@ const Home = () => {
       page={page}
       setPage={setPage}
       ref={ref}
-      totalPage={Math.ceil((data?.totalCount ?? 10) / postPerPage)}
+      totalPage={totalPage}
       isLoading={isLoading}
-      datas={data?.list}
+      datas={data?.list || []}
     />
   );
 };
