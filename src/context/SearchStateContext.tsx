@@ -1,54 +1,20 @@
-import { createContext, useContext, useState, ReactNode, useMemo } from "react";
-import { SearchFileReq } from "../apis/type";
+import { createContext, useContext, useState, ReactNode } from "react";
 type Props = {
   children: ReactNode;
 };
 type DataLists = {
-  state: SearchFileReq & { isClick: boolean };
-  actions: {
-    setState: (datas: SearchFileReq & { isClick: boolean }) => void;
-  };
+  keyword: string;
+  setKeyword: (keyword: string) => void;
 };
 const SearchStateContext = createContext<DataLists>({
-  state: {
-    keyword: "",
-    parentId: "",
-    fileType: "ALL",
-    menuType: "DRIVE",
-    page: 1,
-    count: 10,
-    sort: "TIME",
-    desc: true,
-    isClick: false
-  },
-  actions: {
-    setState: () => {}
-  }
+  keyword: "",
+  setKeyword: () => {}
 });
 
 export const SearchStateContextProvider = ({ children }: Props) => {
-  const [state, setState] = useState<SearchFileReq & { isClick: boolean }>({
-    keyword: "",
-    parentId: "5",
-    fileType: "ALL",
-    menuType: "DRIVE",
-    page: 1,
-    count: 10,
-    sort: "TIME",
-    desc: true,
-    isClick: false
-  });
+  const [keyword, setKeyword] = useState("");
 
-  const actions = useMemo(
-    () => ({
-      setState: (state: SearchFileReq & { isClick: boolean }) => {
-        return setState({ ...state });
-      }
-    }),
-    []
-  );
-
-  return <SearchStateContext.Provider value={{ state, actions }}>{children}</SearchStateContext.Provider>;
+  return <SearchStateContext.Provider value={{ keyword, setKeyword }}>{children}</SearchStateContext.Provider>;
 };
 
 export const useSearchStateContext = () => useContext(SearchStateContext);
