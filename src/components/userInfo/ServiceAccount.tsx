@@ -2,14 +2,17 @@ import styled from "@emotion/styled";
 
 const ServiceAccount = () => {
   const image = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`;
+
+  const onClick = (url: string) => {
+    location.href = url;
+  };
   return (
     <Wrapper image={image} className="service_account">
       <ul>
-        <li>계정 설정</li>
-        <li id="account_info_upgrade">업그레이드</li>
-        <li>다운로드</li>
-        <li>연락처</li>
-        <li>할인 쿠폰 / 이용권</li>
+        <li onClick={() => onClick("/view/setting")}>계정 설정</li>
+        <li onClick={() => onClick("/ko/personal/office?upgrade=1")}>업그레이드</li>
+        <li onClick={() => onClick("/ko/download")}>다운로드</li>
+        <li onClick={() => onClick("/ko/coupon")}>할인 쿠폰 / 이용권</li>
       </ul>
       <div className="b_box">
         <span>로그아웃</span>
