@@ -8,6 +8,6 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": "off",
     "react-hooks/rules-of-hooks": "off", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+    "react-hooks/exhaustive-deps": "off" // Checks effect dependencies
   }
 };

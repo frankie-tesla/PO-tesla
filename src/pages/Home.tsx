@@ -1,20 +1,18 @@
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import FileListWrapper from "../components/lists/FileListWrapper.tsx";
 import useDriveQuery from "../hooks/useDriveQuery.tsx";
 import { BaseRequest } from "../apis/type";
 import CarService from "../apis/carListService";
 import { SHA256 } from "crypto-js";
-
 import { useSearchStateContext } from "../context/SearchStateContext.tsx";
+import storage from "../utils/localstorage.ts";
+import usePagenation from "../hooks/usePagenation.tsx";
 
 const Home = () => {
-  const ref = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(1);
-  const [totalCount, setTotalCount] = useState(10);
-  const postPerPage = useMemo(() => Math.ceil((ref.current?.clientHeight || 500) / 50), [ref.current?.clientHeight]);
-
   const { keyword } = useSearchStateContext();
   const { getDriveList } = useDriveQuery();
+  const { ref, postPerPage, totalPage } = usePagenation();
   const [driveRequestData, setDriveRequestData] = useState<BaseRequest>({
     page: page,
     path: "PATH://drive/",
@@ -52,10 +50,12 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, keyword, postPerPage]);
 
-  const { isLoading, data } = getDriveList(driveRequestData);
+  const { isLoading, data, isSuccess } = getDriveList(driveRequestData);
 
-  const totalPage = useMemo(() => Math.ceil((data?.totalCount ?? 10) / postPerPage), [postPerPage, data?.totalCount]);
-  console.log("eawda", totalPage, postPerPage, data?.totalCount);
+  if (isSuccess) {
+    storage.set("page", data.totalCount);
+  }
+
   return (
     <FileListWrapper
       setDriveRequestData={setDriveRequestData}
