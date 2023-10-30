@@ -7,7 +7,7 @@ const useDriveQuery = () => {
 
   const getDriveList = (data: BaseRequest) => {
     return useQuery({
-      queryKey: ["myDrives", data.page, data.parentId, data.path, data.sort, data.desc],
+      queryKey: ["myDrives", data.page, data.parentId, data.path, data.sort, data.desc, data.keyword],
       queryFn: () => car.getDriveList(data),
       staleTime: 1000 * 30,
       refetchOnWindowFocus: true,
@@ -17,7 +17,7 @@ const useDriveQuery = () => {
 
   const getFavoriteList = (data: Favorite) => {
     return useQuery({
-      queryKey: ["favorites", data.page, data.count, data.sort, data.desc],
+      queryKey: ["favorites", data.page, data.count, data.sort, data.desc, data.keyword],
       queryFn: () => car.getFavoriteList(data),
       staleTime: 1000 * 30,
       refetchOnWindowFocus: true,
@@ -27,7 +27,7 @@ const useDriveQuery = () => {
 
   const getShareList = (data: Favorite) => {
     return useQuery({
-      queryKey: ["shares", data.page, data.count, data.sort, data.desc],
+      queryKey: ["shares", data.page, data.count, data.sort, data.desc, data.keyword],
       queryFn: () => car.getShareList(data),
       staleTime: 1000 * 30,
       refetchOnWindowFocus: true,
@@ -38,11 +38,20 @@ const useDriveQuery = () => {
   const getSearchFile = (data: SearchFileReq) => {
     return useQuery({
       queryKey: ["search", data.keyword, data.page, data.count, data.sort, data.desc],
-      queryFn: () => car.searchFile(data),
+      queryFn: () =>
+        car.searchFile({
+          keyword: data.keyword,
+          parentId: data.parentId,
+          fileType: data.fileType,
+          menuType: data.menuType,
+          page: data.page,
+          count: data.count,
+          desc: data.desc,
+          sort: data.sort
+        }),
       staleTime: 1000 * 120,
       refetchOnWindowFocus: true,
-      retry: false,
-      enabled: false
+      retry: false
     });
   };
 

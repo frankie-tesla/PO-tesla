@@ -62,7 +62,6 @@ const FileList = (
   }
 
   const onClick = (type: string, fileId: string, fileName: string) => {
-    const docType = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
     if (type === "DIR") {
       setDriveRequestData({
         ...driveRequestData,
@@ -76,39 +75,33 @@ const FileList = (
           fileId
         }
       ]);
-    } else if (docType === "pdf" || docType === "hwp") {
-      location.href = "/d/" + base62.encode(Number(fileId)) + "?tesla=true";
     } else {
-      location.href = "/d/" + base62.encode(Number(fileId)) + "/" + "#MyDocument?FileBrowser";
+      location.href = "/d/" + base62.encode(Number(fileId)) + "?tesla=true";
     }
   };
 
   return (
     <List id="list" ref={ref}>
-      {datas?.length === 0 ? (
-        <Nodoc type={type} />
-      ) : (
-        datas?.map((data) => {
-          const fileExts = data.fileName.split(".");
-          const fileImg = data.fileType === "DIR" ? "/cloud/folder" : `/v4/${fileExts[fileExts.length - 1]}`;
-          return (
-            <UlStyle key={data.fileId} onClick={() => onClick(data.fileType, data.fileId, data.fileName)}>
-              <li className="form">
-                <img
-                  className="ext_img"
-                  src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img${fileImg}.svg`}
-                  alt="ext"
-                />
-              </li>
-              <li className="name">
-                <div className="tit">{data.fileName}</div>
-              </li>
-              <li className="modify">{convertUnixDate(data.lastModified)}</li>
-              <li className="size">{data.fileType === "DIR" ? "" : getSize(data.size)}</li>
-            </UlStyle>
-          );
-        })
-      )}
+      {datas?.map((data) => {
+        const fileExts = data.fileName.split(".");
+        const fileImg = data.fileType === "DIR" ? "/cloud/folder" : `/v4/${fileExts[fileExts.length - 1]}`;
+        return (
+          <UlStyle key={data.fileId} onClick={() => onClick(data.fileType, data.fileId, data.fileName)}>
+            <li className="form">
+              <img
+                className="ext_img"
+                src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img${fileImg}.svg`}
+                alt="ext"
+              />
+            </li>
+            <li className="name">
+              <div className="tit">{data.fileName}</div>
+            </li>
+            <li className="modify">{convertUnixDate(data.lastModified)}</li>
+            <li className="size">{data.fileType === "DIR" ? "" : getSize(data.size)}</li>
+          </UlStyle>
+        );
+      })}
     </List>
   );
 };
