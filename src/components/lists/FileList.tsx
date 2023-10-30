@@ -4,11 +4,15 @@ import { getSize } from "../../utils/size.ts";
 import Nodoc from "../Nodoc.tsx";
 import Skeleton from "../Skeleton.tsx";
 import { ForwardedRef, forwardRef } from "react";
+import { getLogData } from "../../utils/log.ts";
 import { base62 } from "../../utils/base62.ts";
 import { BaseRequest } from "../../apis/type.ts";
 import { ListData } from "../../apis/type.ts";
 import { UlStyle } from "./ListSubject.tsx";
+import useLog from "../../hooks/useLog.tsx";
 import { useDocumentLocationTypeContext } from "../../context/DocumentLocationTypeContext.tsx";
+import { ILogMessage } from "../../interfaces/log.ts";
+import { useCookies } from "react-cookie";
 
 type FolderTree = {
   fileId: string;
@@ -46,6 +50,8 @@ const FileList = (
   ref: ForwardedRef<HTMLDivElement>
 ) => {
   const { type } = useDocumentLocationTypeContext();
+  const { setLog } = useLog();
+  const [cookies] = useCookies();
 
   if (isLoading) {
     return (
@@ -61,7 +67,20 @@ const FileList = (
     return <Nodoc type={type} />;
   }
 
-  const onClick = (type: string, fileId: string, fileName: string) => {
+  const handleClick = (type: string, fileId: string, fileName: string) => {
+    const extArr = fileName.split(".");
+    const logData: ILogMessage = getLogData(
+      cookies.AID,
+      cookies.BID,
+      cookies.SID,
+      cookies.TID,
+      "vehiclemode",
+      extArr[extArr.length - 1].toUpperCase(),
+      "cl",
+      "ux"
+    );
+    setLog(logData);
+
     if (type === "DIR") {
       setDriveRequestData({
         ...driveRequestData,
@@ -86,7 +105,7 @@ const FileList = (
         const fileExts = data.fileName.split(".");
         const fileImg = data.fileType === "DIR" ? "/cloud/folder" : `/v4/${fileExts[fileExts.length - 1]}`;
         return (
-          <UlStyle key={data.fileId} onClick={() => onClick(data.fileType, data.fileId, data.fileName)}>
+          <UlStyle key={data.fileId} onClick={() => handleClick(data.fileType, data.fileId, data.fileName)}>
             <li className="form">
               <img
                 className="ext_img"
