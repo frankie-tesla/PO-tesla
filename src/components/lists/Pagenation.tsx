@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import styled from "@emotion/styled";
 import Next from "../../assets/Next";
 import Prev from "../../assets/Prev";
@@ -66,7 +66,7 @@ const Pagenation = ({ totalPage, limit, page, setPage }: PagenationType) => {
   );
 };
 
-export default Pagenation;
+export default memo(Pagenation);
 
 const Wrapp = styled.div`
   width: 100%;
