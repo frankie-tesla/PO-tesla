@@ -26,12 +26,12 @@ const Home = () => {
     useEffect(() => {
       const login = async () => {
         const car = new CarService();
-        const password = "fhrhxla12!";
+        const password = "infra1122!";
         const hash = SHA256(password).toString();
 
         const res = await car.Login({
           autoLogin: true,
-          email: "frankie.j.kim@polarisoffice.com",
+          email: "luna.s.jo@polarisoffice.com",
           password: hash
         });
         console.log(res);
