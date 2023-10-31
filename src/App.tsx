@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import SideBar from "./components/SideBar";
 import styled from "@emotion/styled";
+import { Global } from "@emotion/react";
 import GlobalStyle from "./styles/GlobalStyle";
 import { Outlet } from "react-router-dom";
 import { DocumentLocationTypeContextProvider } from "./context/DocumentLocationTypeContext";
@@ -8,7 +9,7 @@ import { SearchStateContextProvider } from "./context/SearchStateContext";
 function App() {
   return (
     <>
-      <GlobalStyle />
+      <Global styles={GlobalStyle} />
       <SearchStateContextProvider>
         <Header />
         <DocumentLocationTypeContextProvider>

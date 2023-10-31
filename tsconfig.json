@@ -19,8 +19,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "esModuleInterop": true
   },
-  "include": ["src", "global.d.ts", "vite-env-override.d.ts"],
+  "include": ["src", "global.d.ts", "vite-env-override.d.ts", "setupTests.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
