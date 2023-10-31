@@ -12,7 +12,7 @@ import { UlStyle } from "./ListSubject.tsx";
 import useLog from "../../hooks/useLog.tsx";
 import { useDocumentLocationTypeContext } from "../../context/DocumentLocationTypeContext.tsx";
 import { ILogMessage } from "../../interfaces/log.ts";
-import { useCookies } from "react-cookie";
+import cookie from "../../utils/cookie.ts";
 import { VITE_APP_URL } from "../../__mocks__/constants.ts";
 
 type FolderTree = {
@@ -52,7 +52,6 @@ const FileList = (
 ) => {
   const { type } = useDocumentLocationTypeContext();
   const { setLog } = useLog();
-  const [cookies] = useCookies();
 
   if (isLoading) {
     return (
@@ -69,19 +68,6 @@ const FileList = (
   }
 
   const handleClick = (type: string, fileId: string, fileName: string) => {
-    const extArr = fileName.split(".");
-    const logData: ILogMessage = getLogData(
-      cookies.AID,
-      cookies.BID,
-      cookies.SID,
-      cookies.TID,
-      "vehiclemode",
-      extArr[extArr.length - 1].toUpperCase(),
-      "cl",
-      "ux"
-    );
-    setLog(logData);
-
     if (type === "DIR") {
       setDriveRequestData({
         ...driveRequestData,
@@ -96,6 +82,18 @@ const FileList = (
         }
       ]);
     } else {
+      const extArr = fileName.split(".");
+      const logData: ILogMessage = getLogData(
+        cookie.getCookie("AID") as string,
+        cookie.getCookie("BID") as string,
+        cookie.getCookie("SID") as string,
+        cookie.getCookie("TID") as string,
+        "vehiclemode",
+        extArr[extArr.length - 1].toUpperCase(),
+        "cl",
+        "ux"
+      );
+      setLog(logData);
       location.href = "/d/" + base62.encode(Number(fileId)) + "?tesla=true";
     }
   };
