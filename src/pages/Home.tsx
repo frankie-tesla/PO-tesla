@@ -26,12 +26,12 @@ const Home = () => {
     useEffect(() => {
       const login = async () => {
         const car = new CarService();
-        const password = "infra1122!";
+        const password = import.meta.env.VITE_APP_LOGIN_PASSWORD;
         const hash = SHA256(password).toString();
 
         const res = await car.Login({
           autoLogin: true,
-          email: "luna.s.jo@polarisoffice.com",
+          email: import.meta.env.VITE_APP_LOGIN_EMAIL,
           password: hash
         });
         console.log(res);
