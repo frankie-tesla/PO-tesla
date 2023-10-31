@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 
 import { DriveLocation as DriveLocationType, BaseRequest } from "../../apis/type.ts";
+import { VITE_APP_URL } from "../../__mocks__/constants.ts";
 type Props = {
   docLocations: Doctype[];
   setDriveRequestData: (data: BaseRequest) => void;
@@ -13,7 +14,7 @@ type Doctype = {
 };
 
 const DriveLocation = ({ docLocations, driveRequestData, setDriveRequestData, setDocLocations }: Props) => {
-  const url = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/location_bg.svg`;
+  const url = `${VITE_APP_URL}/web/maxage1/common/img/location_bg.svg`;
   const onClick = (fileId: string) => {
     setDriveRequestData({
       ...driveRequestData,

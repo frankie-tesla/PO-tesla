@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Skeleton from "../Skeleton";
+import { VITE_APP_URL } from "../../__mocks__/constants";
 type Props = {
   level: 4 | 8 | 9 | 12 | 13 | undefined;
   isLoading: boolean;
@@ -22,11 +23,7 @@ const LevelStatus = ({ level, isLoading }: Props) => {
   const icon = level === 4 ? "ic_business_small" : "ic_crown_small";
   return (
     <Wrapper level={level ?? 4}>
-      <img
-        src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/${icon}.svg`}
-        className={icon}
-        alt="crown"
-      />
+      <img src={`${VITE_APP_URL}/web/maxage1/common/img/cloud/${icon}.svg`} className={icon} alt="crown" />
       <strong>{userLevel[level ?? 4].title} 서비스 이용 중</strong>
     </Wrapper>
   );

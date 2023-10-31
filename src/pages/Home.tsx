@@ -7,6 +7,7 @@ import { SHA256 } from "crypto-js";
 import { useSearchStateContext } from "../context/SearchStateContext.tsx";
 import storage from "../utils/localstorage.ts";
 import usePagenation from "../hooks/usePagenation.tsx";
+import { MODE, VITE_APP_LOGIN_EMAIL, VITE_APP_LOGIN_PASSWORD } from "../__mocks__/constants.ts";
 
 const Home = () => {
   const [page, setPage] = useState(1);
@@ -22,16 +23,17 @@ const Home = () => {
     desc: true,
     keyword: keyword
   });
-  if (import.meta.env.MODE === "development") {
+
+  if (MODE === "development") {
     useEffect(() => {
       const login = async () => {
         const car = new CarService();
-        const password = import.meta.env.VITE_APP_LOGIN_PASSWORD;
+        const password = VITE_APP_LOGIN_PASSWORD;
         const hash = SHA256(password).toString();
 
         const res = await car.Login({
           autoLogin: true,
-          email: import.meta.env.VITE_APP_LOGIN_EMAIL,
+          email: VITE_APP_LOGIN_EMAIL,
           password: hash
         });
         console.log(res);

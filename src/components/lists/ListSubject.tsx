@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { BaseRequest } from "../../apis/type";
+import { VITE_APP_URL } from "../../__mocks__/constants";
 type Props = {
   setDriveRequestData: (data: BaseRequest) => void;
   driveRequestData: BaseRequest;
@@ -25,7 +26,7 @@ const ListSubject = ({ setDriveRequestData, driveRequestData }: Props) => {
   const isItemSelected = (item: string) => sort === item;
 
   const sortOrderClassName = desc ? "down" : "up";
-  const arrowImg = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/arrow_${sortOrderClassName}.svg`;
+  const arrowImg = `${VITE_APP_URL}/web/maxage1/common/img/cloud/arrow_${sortOrderClassName}.svg`;
   return (
     <UlStyle className="tb_header">
       <li className="form pointer" onClick={() => handleClick("TIME")}>

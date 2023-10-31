@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
+import { VITE_APP_URL } from "../../__mocks__/constants";
 
 const ServiceAccount = () => {
-  const image = `${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`;
+  const image = `${VITE_APP_URL}/web/maxage1/common/img/cloud/bg_service_account.png`;
 
   const onClick = (url: string) => {
     location.href = url;

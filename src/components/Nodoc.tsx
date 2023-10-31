@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { VITE_APP_URL } from "../__mocks__/constants";
 type Props = {
   type: string;
 };
@@ -22,7 +23,7 @@ const Nodoc = ({ type }: Props) => {
   };
   return (
     <Wrapper className="no_doc sub">
-      <img src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/${noDocImg()}.png`} alt="no_doc" />
+      <img src={`${VITE_APP_URL}/web/maxage1/common/img/${noDocImg()}.png`} alt="no_doc" />
       <dl>
         <dt>{noDocText()}</dt>
         <dd></dd>

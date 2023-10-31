@@ -2,11 +2,11 @@ import styled from "@emotion/styled";
 import { numberset } from "../../utils/nemberset";
 import useUserInfoQuery from "../../hooks/useUserInfoQuery";
 import Skeleton from "../Skeleton";
+import { VITE_APP_STATIC } from "../../__mocks__/constants";
 
 const CreditInfo = () => {
   const { getAIUserInfo } = useUserInfoQuery();
   const { data, isLoading } = getAIUserInfo();
-
   if (isLoading) {
     <Wrapper>
       <div className="point">
@@ -16,7 +16,7 @@ const CreditInfo = () => {
             <span>
               <Skeleton width={50} height={20} />
             </span>
-            <img src={`${import.meta.env.VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
+            <img src={`${VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
           </dd>
         </dl>
       </div>
@@ -29,7 +29,7 @@ const CreditInfo = () => {
           <dt>Credit</dt>
           <dd>
             <span>{numberset(data?.userinfo?.remainCredit)}</span>
-            <img src={`${import.meta.env.VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
+            <img src={`${VITE_APP_STATIC}/icon/ico-credit.svg`} alt="credit-icon" />
           </dd>
         </dl>
       </div>

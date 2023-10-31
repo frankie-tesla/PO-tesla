@@ -1,10 +1,11 @@
 import styled from "@emotion/styled";
 import SearchBar from "./SearchBar";
+import { VITE_APP_STATIC } from "../__mocks__/constants";
 
 const Header = () => {
   return (
     <Wrapper>
-      <img className="logo_img" src={`${import.meta.env.VITE_APP_STATIC}/common/logo/logo_pc.svg`} alt="logo" />
+      <img className="logo_img" src={`${VITE_APP_STATIC}/common/logo/logo_pc.svg`} alt="logo" />
       <SearchBar />
     </Wrapper>
   );

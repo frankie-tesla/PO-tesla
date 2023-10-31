@@ -13,6 +13,7 @@ import useLog from "../../hooks/useLog.tsx";
 import { useDocumentLocationTypeContext } from "../../context/DocumentLocationTypeContext.tsx";
 import { ILogMessage } from "../../interfaces/log.ts";
 import { useCookies } from "react-cookie";
+import { VITE_APP_URL } from "../../__mocks__/constants.ts";
 
 type FolderTree = {
   fileId: string;
@@ -107,11 +108,7 @@ const FileList = (
         return (
           <UlStyle key={data.fileId} onClick={() => handleClick(data.fileType, data.fileId, data.fileName)}>
             <li className="form">
-              <img
-                className="ext_img"
-                src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img${fileImg}.svg`}
-                alt="ext"
-              />
+              <img className="ext_img" src={`${VITE_APP_URL}/web/maxage1/common/img${fileImg}.svg`} alt="ext" />
             </li>
             <li className="name">
               <div className="tit">{data.fileName}</div>

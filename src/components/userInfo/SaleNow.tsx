@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
+import { VITE_APP_URL } from "../../__mocks__/constants";
 const SaleNow = () => {
   //toDo: API 연결 시 sale 이미지 포함
   const onClick = () => {
-    location.href = "ko/personal/office?upgrade=1";
+    location.href = "/ko/personal/office?upgrade=1";
   };
+
   return (
     <Wrapper className="upgrade_banner">
       <button onClick={onClick}>
-        <img src={`${import.meta.env.VITE_APP_URL}/web/maxage1/common/img/cloud/ic_crown_small.svg`} alt="crown" />
+        <img src={`${VITE_APP_URL}/web/maxage1/common/img/cloud/ic_crown_small.svg`} alt="crown" />
         <span>Pro 알아보기</span>
       </button>
     </Wrapper>
